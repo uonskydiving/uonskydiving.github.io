@@ -1,0 +1,1099 @@
+:root {
+    --brand-gold: rgb(215, 181, 61);
+    --header-grad-from: rgba(0, 0, 0, 0.6);
+    --header-grad-mid: rgba(0, 0, 0, 0.3);
+    --social-size: 28px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Soho Std', 'Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: #fff;
+}
+
+body {
+    position: relative;
+    background-color: #000;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: url('Images/Home Page Background.png') top center/100% auto no-repeat;
+    z-index: -2;
+}
+
+body.info-page::before {
+    background: url('Images/Exit Background.webp') top center/100% auto no-repeat;
+}
+
+body.faqs-page::before {
+    background-image: url('Images/Wing Tip Background.webp');
+    background-position: center 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body.licence-page::before {
+    background: url('Images/Canopy Through Trees Background.webp') top center/cover no-repeat;
+}
+
+body:not(.home-page)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.25);
+    z-index: -1;
+}
+
+/* LAYOUT ------------------------------------------------------------ */
+.container {
+    width: min(90%, 1200px);
+    margin-inline: auto;
+}
+
+.section {
+    padding-block: 4rem;
+}
+
+/* HEADER ------------------------------------------------------------ */
+.site-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    color: #fff;
+}
+
+.site-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    background: linear-gradient(
+        to bottom,
+        var(--header-grad-from) 0%,
+        var(--header-grad-mid) 75%,
+        transparent 100%
+    );
+    z-index: -1;
+}
+
+.header-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 2rem;
+}
+
+.social { display: flex; gap: 2rem; }
+.social svg {
+    inline-size: var(--social-size);
+    block-size:  var(--social-size);
+    fill: #fff;
+}
+.social a:hover svg { fill: #ccc; }
+
+.logo { height: clamp(60px, 15vw, 150px); width: auto; }
+
+.btn-su {
+    border: 3px solid #fff;
+    padding: 1rem 2rem;
+    font-family: 'Soho Std', 'Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: .5px;
+}
+.btn-su:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* NAVIGATION -------------------------------------------------------- */
+.main-nav ul      { list-style: none; display: flex; gap: 2rem; }
+.main-nav a       {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Soho Std Light', 'Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 300;
+    letter-spacing: .03em;
+    font-size: .9rem;
+    text-transform: uppercase;
+}
+.main-nav a:hover { color: var(--brand-gold); }
+.main-nav .active { border-bottom: 2px solid #fff; }
+
+/* HERO TAGLINE ------------------------------------------------------ */
+.hero        { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; gap: 1rem; padding: 3rem 1.5rem 2rem; }
+.tagline     { color: #fff; font-weight: 800; text-transform: uppercase; }
+.small-tag   { font-size: clamp(0.75rem, 5vw, 2.5rem); letter-spacing: .5px; }
+.big-tag     { font-size: clamp(1.5rem, 10vw, 5rem); white-space: nowrap; }
+.page-title  {
+    text-transform: none;
+    font-size: clamp(2.5rem, 6vw, 3rem);
+}
+
+/* MOBILE TWEAKS ----------------------------------------------------- */
+@media (max-width: 600px) {
+    .header-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .logo {
+        order: 1;
+        width: 60%;
+        max-width: 300px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .social { order: 2; }
+    .btn-su { order: 3; }
+    .main-nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+    .small-tag { font-size: 1.25rem; }
+    .big-tag   { font-size: 2.5rem; }
+    .hero      { padding: 1rem; }
+}
+
+@media (min-width: 1024px) {
+    .small-tag { font-size: clamp(1.25rem, 2.5vw, 2.5rem); }
+    .big-tag   { font-size: clamp(2.5rem, 5vw, 5rem); }
+}
+
+/* INFO PAGE LAYOUT ------------------------------------------------ */
+.info-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 1.5rem 3rem;
+}
+.info-main .page-title {
+    font-family: 'Futura', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+}
+.about-text {
+    line-height: 2;
+    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+    font-family: 'Soho Std Light','Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 300;
+}
+.about-section { display: flex; flex-direction: column; gap: 2rem; }
+.about-section > .about-text { width: 100%; }
+.about-row { display: flex; flex-wrap: nowrap; gap: 2rem; align-items: flex-start; }
+.about-column { flex: 1 1 50%; }
+.about-text b { font-weight: 800; }
+.about-map { flex: 1 1 50%; aspect-ratio: 2 / 1; }
+.about-map iframe { width: 100%; height: 100%; border: 0; }
+.btn-langar { margin-top: 2rem; display: inline-block; }
+.soho-font {
+    font-family: 'Soho Std', 'Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* DASHBOARD GRID -------------------------------------------------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.dashboard-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dashboard-item h2 {
+    font-family: 'Futura PT', 'Futura', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 700;
+}
+
+.dashboard-item p {
+    font-family: 'Soho Std', 'Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 400;
+}
+
+@media (max-width: 700px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+}
+
+/* BUTTON GRID ---------------------------------------------------- */
+.btn-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-top: 1rem;
+}
+
+.btn-grid a {
+    text-align: center;
+    display: block;
+}
+
+@media (max-width: 700px) {
+    .about-row { flex-direction: column; }
+}
+
+/* TILE GRID ------------------------------------------------------- */
+.tile-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 2rem; text-align: center; }
+
+@media (max-width: 700px) {
+    .tile-grid { display: flex; flex-direction: column; gap: 2rem; align-items: center; }
+    .tile-grid > a { width: 100%; max-width: 340px; }
+}
+.tile-grid img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center; display: block; }
+.tile-grid a {
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Soho Std Light','Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: .03em;
+}
+.tile-grid a span {
+    position: absolute;
+    left: 1rem;
+    bottom: 20%;
+}
+.tile-grid a:hover span { color: var(--brand-gold); }
+
+
+@media (max-width: 700px) {
+    .main-nav,
+    .social,
+    .header-btn { display: none; }
+    .hamburger { display: inline-block; }
+}
+@media (min-width: 701px) {
+    .mobile-overlay { display: none !important; }
+    #nav-toggle { display: none; }
+    .hamburger { display: none; }
+}
+
+/* MOBILE MENU ----------------------------------------------------- */
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    display: none;
+    z-index: 998;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.75rem 3rem;
+    overflow: hidden;
+}
+.mobile-overlay .mobile-menu {
+    width: 100%;
+    max-width: 480px;
+    background: transparent;
+    box-shadow: none;
+    padding-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.mobile-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    font-size: 1.75rem;
+    text-align: left;
+    margin: 0;
+    width: 100%;
+}
+.mobile-links li { width: 100%; }
+.mobile-social {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: .75rem;
+}
+.mobile-btn {
+    display: block;
+    padding: 1rem 3rem;
+    max-width: 300px;
+    margin: 0 auto .75rem;
+}
+.mobile-links a {
+    color: #fff !important;
+    text-decoration: none;
+    font-family: 'Soho Std Light','Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 300;
+}
+.hamburger {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    width: 40px;
+    height: 40px;
+    z-index: 1001;
+    cursor: pointer;
+    display: none;
+}
+.hamburger span {
+    position: absolute;
+    left: 8px;
+    width: 24px;
+    height: 3px;
+    background: #fff;
+    transition: transform .25s ease;
+    transform-origin: center;
+}
+.hamburger span:first-child { top: 12px; }
+.hamburger span:last-child  { top: 25px; }
+#nav-toggle:checked ~ .site-header .hamburger span:first-child {
+    top: 19px;
+    transform: rotate(45deg);
+}
+#nav-toggle:checked ~ .site-header .hamburger span:last-child {
+    top: 19px;
+    transform: rotate(-45deg);
+}
+#nav-toggle:checked ~ .mobile-overlay { display: flex; }
+
+/* PRICING PAGE STYLES -------------------------------------------- */
+.pricing-section {
+    padding: 5rem 1.5rem 2rem;
+}
+
+.pricing-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Futura PT', 'Futura', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.price-item h3 {
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.price-note {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.price-list {
+    display: inline-block;
+    text-align: left;
+    padding-left: 1.25rem;
+}
+
+.pricing-cta {
+    margin-top: 2rem;
+    display: inline-block;
+}
+
+@media (max-width: 700px) {
+    .pricing-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+}
+
+/* FAQ PAGE STYLES ------------------------------------------------- */
+
+.faq-section {
+    padding: 5rem 1.5rem 2rem;
+}
+
+.faq-section .page-title {
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Futura PT', 'Futura', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+}
+
+.faq-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.faq-item h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Futura PT', 'Futura', sans-serif;
+}
+
+.faq-item p,
+.text-content,
+.course-comparison p,
+.course-right p,
+.join-text,
+.course-copy {
+    line-height: 1.6;
+    font-family: 'Soho Std Light','Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 300;
+}
+
+.faq-item p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.faq-item a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.faq-item a:visited {
+    color: #fff;
+}
+
+/* LICENCE PAGE STYLES -------------------------------------------- */
+.licence-page .tagline {
+    font-family: 'Futura PT', 'Futura', sans-serif;
+}
+
+.licence-page .hero-text {
+    text-align: left;
+}
+
+.licence-page .big-tag {
+    white-space: normal;
+    font-size: clamp(1rem, 6.7vw, 3.33rem);
+}
+
+.licence-page .tile-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    justify-items: center;
+}
+.licence-page p {
+    font-size: 1.125rem;
+}
+.licence-page .tile-grid a {
+    font-family: 'Futura PT', 'Futura', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    max-width: 250px;
+}
+.licence-page .tile-grid img {
+    aspect-ratio: 4 / 5;
+}
+
+body.contact-page::before {
+    background: url('Images/Head Down Head Up Background.webp') top center/100% auto no-repeat;
+    filter: grayscale(100%);
+}
+
+body.contact-page::after {
+    background: rgba(0,0,0,0.5);
+}
+
+.contact-hero {
+    justify-content: center;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-family: 'Soho Std Light','Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 300;
+}
+
+.contact-social {
+    margin-top: 1rem;
+}
+
+.contact-btn {
+    margin-top: 1rem;
+}
+
+/* CATEGORY SYSTEM PAGE STYLES ------------------------------------ */
+.intro-summary {
+    padding: 5rem 1.5rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.intro-list {
+    list-style: disc;
+    padding-left: 1.5rem;
+    line-height: 1.6;
+    font-family: 'Soho Std Light','Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 300;
+}
+
+.intro-list li {
+    margin-bottom: 1rem;
+}
+
+.course-overview {
+    padding: 5rem 1.5rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.course-section {
+    padding: 5rem 1.5rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.course-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.course-left {
+    flex: 1 1 300px;
+}
+
+.course-right {
+    flex: 1 1 300px;
+}
+
+.course-title {
+    text-align: left;
+}
+
+.accordion details {
+    margin-bottom: 1rem;
+}
+
+.accordion summary {
+    cursor: pointer;
+    font-family: 'Futura PT', 'Futura', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    list-style: none;
+}
+
+.accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+.accordion p {
+    margin-top: 0.5rem;
+
+/* AFF PAGE STYLES -------------------------------------------------- */
+.aff-hero {
+    position: relative;
+    background: url('Images/Home Page Background.png') center/cover no-repeat;
+    padding: clamp(6rem, 10vw, 8rem) 2rem;
+}
+.aff-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%);
+    z-index: -1;
+}
+
+.hero-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-text { flex: 3 1 300px; }
+.hero-media { flex: 2 1 250px; }
+.hero-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.course-intro p {
+    font-family: 'Soho Std', 'Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.hero-list {
+    list-style: none;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+.hero-list li {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+.hero-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: #fff;
+    transform: translateY(-50%);
+}
+
+.course-section h2 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    text-transform: uppercase;
+    font-weight: 800;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.course-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.course-left { flex: 1 1 250px; }
+.course-right { flex: 1 1 400px; }
+
+.course-accordion {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.accordion-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-family: 'Soho Std Light','Soho', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.accordion-item .icon { margin-left: 1rem; }
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    margin-bottom: 1rem;
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-caption {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.course-right p {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .hero-inner { flex-direction: column; }
+    .hero-media img { max-height: 300px; object-fit: cover; }
+    .licence-page .hero-inner { flex-direction: row; }
+}
+@media (max-width: 600px) {
+    .licence-page .hero-inner { flex-direction: column; }
+}
+
+/* COMMITTEE PAGE STYLES ----------------------------------------- */
+body.committee-page::before {
+    background: none;
+}
+
+.committee-hero {
+    position: relative;
+    background: url('Images/committee/hero.jpg') center/cover no-repeat;
+}
+
+.committee-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+}
+
+.committee-hero h1 {
+    position: relative;
+}
+
+.past-committee-hero {
+    position: relative;
+    background: url('Images/Langar Evening Background.webp') center/cover no-repeat;
+}
+
+.past-committee-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+}
+
+.past-committee-hero h1 {
+    position: relative;
+}
+
+.committee-section {
+    padding: 4rem 1.5rem 3rem;
+    background-color: #000;
+}
+
+.committee-grid {
+    display: grid;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+    .committee-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .committee-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.committee-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    outline: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.committee-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.committee-card:hover img,
+.committee-card:focus img {
+    transform: scale(1.02);
+}
+
+.qualifiers-section {
+    padding: 4rem 1.5rem;
+    background-color: #000;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.qualifiers-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.qualifiers-list li + li {
+    margin-top: 0.5rem;
+}
+
+.committee-card:hover,
+.committee-card:focus {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.committee-card:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.committee-card figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.committee-name {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.committee-role {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+
+
+/* HISTORY & LEGACY PAGE STYLES ----------------------------------- */
+.legacy-hero {
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+}
+.legacy-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('Images/Canopy Through Trees Background.webp') center/cover no-repeat;
+    filter: brightness(0.4);
+    z-index: -1;
+}
+
+.presidents-gallery { background-color: #000; }
+
+.president-backdrop {
+    position: relative;
+}
+.president-backdrop::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('Images/Langar Evening Background.webp') center/cover no-repeat;
+    filter: brightness(0.4);
+    z-index: -1;
+}
+
+.president-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+}
+
+.president-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+.president-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.president-caption {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.outline-btn {
+    display: inline-block;
+    border: 2px solid #fff;
+    padding: 0.4rem 0.75rem;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.outline-btn:hover,
+.outline-btn:focus {
+    background: #fff;
+    color: #000;
+}
+.outline-btn:focus {
+    outline: 2px solid var(--brand-gold);
+    outline-offset: 2px;
+}
+
+.president-legacy {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+}
+.president-legacy .outline-btn { margin-top: 0.5rem; }
+
+.alumni-cta {
+    background: #111;
+    padding: 3rem 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+}
+.alumni-cta a { color: #fff; text-decoration: underline; }
+
+.achievements {
+    padding: 3rem 1.5rem;
+}
+.achievements h2 {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.achieve-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    border: 2px solid #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.achieve-box:hover,
+.achieve-box:focus {
+    background: #fff;
+    color: #000;
+}
+
+@media (max-width: 1023px) {
+    .president-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .achievements-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 639px) {
+    .president-grid { grid-template-columns: repeat(1, minmax(0,1fr)); }
+    .achievements-grid { grid-template-columns: repeat(1, minmax(0,1fr)); }
+    .president-legacy { text-align: center; }
+
+/* HOW TO JOIN PAGE STYLES -------------------------------------- */
+.join-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.join-text {
+    flex: 1 1 300px;
+    max-width: 75ch;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.course-copy {
+    margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+    .course-left, .course-right {
+        flex: 1 1 100%;
+    }
+
+.join-text p + p {
+    margin-top: 1rem;
+}
+
+.join-image {
+    flex: 1 1 350px;
+}
+
+.join-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 3 / 2;
+    display: block;
+}
+
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin: 2rem 1.5rem 3rem;
+}
+
+.cta-buttons a {
+    flex: 1 1 200px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .join-image { margin-top: 2rem; }
+    .cta-buttons a { flex-basis: 100%; }
+}

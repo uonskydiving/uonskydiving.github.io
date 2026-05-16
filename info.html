@@ -5,265 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Info – UoN Skydiving Club</title>
 
-  <!-- ---- Re‑use the same in‑file stylesheet from index.html ---- -->
-  <style>
-  /* Copy of the global CSS from index.html (shortened where possible) */
-  :root{
-    --brand-gold: rgb(215 181 61);
-    --header-grad-from: rgba(0 0 0 / 0.6);
-    --header-grad-mid:  rgba(0 0 0 / 0.3);
-    --social-size: 28px;
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;display:flex;flex-direction:column;font-family:'Soho',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff}
-  body::before{content:'';position:fixed;inset:0;background:url('images/home_page_background.png') 50% 70%/cover no-repeat;z-index:-1}
-
-  /* Header (identical to index.html) */
-  .site-header{position:relative;display:flex;flex-direction:column;align-items:center;gap:1rem;padding:2rem 2rem;color:#fff}
-  .site-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:-20px;background:linear-gradient(to bottom,var(--header-grad-from)0%,var(--header-grad-mid)75%,transparent 100%);z-index:-1}
-  .header-top{
-      position:relative;                 /* new – for absolute hamburger */
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding-block:2rem;
-  }
-  .social{display:flex;gap:2rem}
-  .social a img,.social svg{inline-size:var(--social-size);block-size:var(--social-size)}
-  .social svg{fill:#fff}.social a:hover svg{fill:#ccc}
-  .logo{height:clamp(70px,17.5vw,175px);width:auto}
-  .btn-su{border:3px solid #fff;padding:1rem 3rem;font-family:'Soho Std Regular','Soho',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-weight:300;font-size:.8rem;color:#fff;text-decoration:none;letter-spacing:.5px}
-  .btn-su:hover{background:#fff;color:#000}
-
-  .main-nav ul{list-style:none;display:flex;gap:2rem}
-  .main-nav a{color:#fff;text-decoration:none;font-family:'Soho Std Light','Soho',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-weight:300;letter-spacing:.03em;font-size:.9rem;text-transform:uppercase}
-  .main-nav a:hover{color:var(--brand-gold)}
-  .main-nav .active{border-bottom:2px solid #fff}
-  @media(max-width:700px){
-      .header-top{flex-direction:column;align-items:center;gap:.75rem}
-      .logo{order:1;width:60%;max-width:300px;height:auto;display:block;margin:0 auto}
-      .social{order:2}.btn-su{order:3}
-  }
-
-  /* ---- INFO PAGE SPECIFIC ---- */
-  /* main content spacing */
-  main{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      gap:3rem;
-      padding:1.5rem 1.5rem 3rem;  /* equal side padding + extra bottom */
-  }
-  .about-text{
-      flex:1 1 300px;
-      line-height:1.6;
-      font-size:clamp(1.4rem,2vw,1.6rem);  /* larger paragraph text */
-      font-family:'Soho Std Light','Soho',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      font-weight:300;
-  }
-
-  .soho-light{
-      font-family:'Soho Std Light','Soho',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      font-weight:300;
-  }
-
-  .about-section{
-      display:flex;
-      flex-wrap:wrap;
-      gap:2rem;
-      align-items:flex-start;   /* avoid map stretching to match tall text */
-  }
-  /* ---- INFO PAGE SPECIFIC ---- */
-  .about-text b{font-weight:800}
-  .about-map{
-      flex:0 1 350px;           /* mostly fixed width but flexible */
-      height:350px;             /* cap height so map doesn't grow excessively */
-      max-width:450px;
-  }
-  .about-map iframe{
-      width:100%;
-      height:100%;
-      border:0;
-  }
-  .btn-langar{margin-top:2rem;display:inline-block}
-
-  /* ---- TILE GRID ---- */
-  .tile-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));  /* three equal columns until media query */
-      gap:2rem;
-      text-align:center;
-  }
-  /* --- Mobile layout: single-column stack --- */
-  @media (max-width: 700px) {
-      .tile-grid{
-          display:flex;
-          flex-direction:column;
-          gap:2rem;
-          align-items:center;
-      }
-      .tile-grid > a{ 
-          width:100%;
-          max-width:340px;
-      }
-  }
-  .tile-grid img{
-      width:100%;
-      height:auto;
-      display:block;
-  }
-  .tile-grid a{
-      text-decoration:none;
-      color:#fff;
-      font-family:'Soho Std Light','Soho',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      font-weight:800;
-      font-size:1.25rem;
-      text-transform:uppercase;
-      letter-spacing:.03em;
-  }
-  .tile-grid a span{
-      display:inline-block;
-      margin-top:.75rem;
-      border-bottom:2px solid #fff;
-  }
-  .tile-grid a:hover span{
-      color:var(--brand-gold);
-      border-bottom-color:var(--brand-gold);
-  }
-  @media(max-width:700px){
-      /* hide desktop elements that appear in sidebar */
-      .main-nav,
-      .social,
-      .header-btn{
-          display:none;
-      }
-  }
-
-  @media(min-width:701px){
-      .mobile-overlay{display:none !important;}
-      #nav-toggle{display:none;}                /* checkbox not needed on desktop */
-  }
-
-  /* ===== MOBILE NAV OVERLAY & MENU (improved centring) ===== */
-  .mobile-overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.85);
-      display:none;
-      z-index:998;
-      flex-direction:column;
-      align-items:flex-start;      /* content hugs left edge */
-      padding:2rem 1.75rem 3rem;   /* side padding matches screenshot */
-      overflow:hidden;
-  }
-  .mobile-overlay .mobile-menu{
-      width:100%;
-      max-width:480px;            /* readable column on tablets */
-      background:transparent;
-      box-shadow:none;
-      padding-top:2.5rem;         /* slightly closer to top */
-      display:flex;
-      flex-direction:column;
-      height:100%;
-  }
-  .mobile-links{
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:1.75rem;
-      font-size:1.75rem;
-      text-align:left;
-      margin-top:0;
-      margin-right:0;
-      margin-bottom:0;
-      margin-left:0;
-      width:100%;
-  }
-  .mobile-links li{
-      width:100%;
-  }
-  /* extra space below links */
-  .mobile-social{
-      display:flex;
-      gap:2rem;
-      justify-content:center;
-      margin-top:auto;      /* push block to bottom */
-      margin-bottom:0.75rem;/* distance from bottom */
-  }
-  .mobile-btn{
-      display:block;
-      padding:1rem 3rem;       /* equal padding */
-      max-width:300px;
-      margin:0 auto 0.75rem;   /* same gap from bottom as socials */
-  }
-  .mobile-links a{
-      color:#fff !important;
-      text-decoration:none;
-      font-family:'Soho Std Light','Soho',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      font-weight:300;
-  }
-
-  /* ─── Hamburger square container ─── */
-  .hamburger{
-      position:absolute;                 /* now scrolls with header */
-      top:0.5rem;
-      left:0.5rem;
-      width:40px;
-      height:40px;
-      z-index:1001;
-      cursor:pointer;
-      display:inline-block;
-  }
-  .hamburger span{
-      position:absolute;
-      left:8px;
-      width:24px;
-      height:3px;
-      background:#fff;
-      transition:transform .25s ease;
-      transform-origin:center;
-  }
-  /* top bar */
-  .hamburger span:first-child{
-      top:12px;                     /* 4px above center */
-  }
-  /* bottom bar */
-  .hamburger span:last-child{
-      top:25px;                     /* 4px below center (12+13) */
-  }
-
-  /* ─── morph into perfect X ─── */
-  #nav-toggle:checked ~ .site-header .hamburger span:first-child{
-      top:19px;                     /* move to center */
-      transform:rotate(45deg);
-  }
-  #nav-toggle:checked ~ .site-header .hamburger span:last-child{
-      top:19px;
-      transform:rotate(-45deg);
-  }
-  #nav-toggle:checked ~ .mobile-overlay{
-      display:flex;
-  }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="info-page">
 
-
-  <input type="checkbox" id="nav-toggle" hidden>
-
-  <!-- HEADER (identical to homepage) -->
+  <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="header-top">
-      <label for="nav-toggle" class="hamburger">
-        <span></span><span></span>
-      </label>
       <div class="social">
         <a href="https://www.instagram.com/uonskydiving/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.25 1.75a.75.75 0 110 1.5.75.75 0 010-1.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg>
         </a>
         <a href="https://www.facebook.com/UoNSkydiving" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.596 0 0 .6 0 1.337v21.326C0 23.4.596 24 1.325 24h11.496v-9.294H9.692v-3.622h3.129V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.098 2.794.142v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.312h3.587l-.467 3.622H16.56V24h6.115c.729 0 1.325-.6 1.325-1.337V1.337C24 .6 23.404 0 22.675 0z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 8H7v4h2v12h5V12h3.642L17 8h-3V5.672C14 4.474 14.265 4 15.179 4H17V0h-2.928C10.807 0 9 1.66 9 4.615V8z"/></svg>
         </a>
         <a href="https://www.youtube.com/@uonskydiving1700" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a2.997 2.997 0 00-2.11-2.12C19.645 3.444 12 3.444 12 3.444s-7.644 0-9.388.622a2.997 2.997 0 00-2.11 2.12C0 7.932 0 12 0 12s0 4.069.502 5.814a2.997 2.997 0 002.11 2.12c1.744.622 9.388.622 9.388.622s7.645 0 9.389-.622a2.997 2.997 0 002.11-2.12C24 16.068 24 12 24 12s0-4.068-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
@@ -271,115 +25,75 @@
       </div>
 
       <a href="index.html">
-        <img src="images/header_logo.png" alt="University of Nottingham Sport – Skydiving" class="logo">
+        <img src="Images/header_logo.png" alt="University of Nottingham Sport – Skydiving" class="logo">
       </a>
 
-      <a href="https://su.nottingham.ac.uk/activities/view/skydive" target="_blank" rel="noopener noreferrer" class="btn-su header-btn">UoNSU</a>
+      <a href="https://su.nottingham.ac.uk/activities/view/skydive" target="_blank" rel="noopener noreferrer" class="btn-su">UoNSU</a>
     </div>
 
     <nav class="main-nav">
       <ul>
         <li><a href="info.html" class="active">INFO</a></li>
         <li><a href="faqs.html">FAQS</a></li>
-        <li><a href="licence.html">GETTING YOUR LICENCE</a></li>
-        <li><a href="dashboard.html">MEMBERS' DASHBOARD</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="getting-your-licence.html">GETTING YOUR LICENCE</a></li>
+        <li><a href="members-dashboard.html">MEMBERS' DASHBOARD</a></li>
+        <li><a href="contact-us.html">CONTACT</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="mobile-overlay">
-    <aside class="mobile-menu">
-      <nav>
-        <ul class="mobile-links">
-          <li><a href="info.html" class="active">INFO</a></li>
-          <li><a href="faqs.html">FAQS</a></li>
-          <li><a href="licence.html">GETTING YOUR LICENCE</a></li>
-          <li><a href="dashboard.html">MEMBERS' DASHBOARD</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
-        </ul>
-
-        <div class="mobile-social">
-          <a href="https://instagram.com/uonskydiving" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><path fill="#fff" d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.25 1.75a.75.75 0 110 1.5.75.75 0 010-1.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg>
-          </a>
-          <a href="https://facebook.com/UoNSkydiving" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><path fill="#fff" d="M22.675 0h-21.35C.596 0 0 .6 0 1.337v21.326C0 23.4.596 24 1.325 24h11.496v-9.294H9.692v-3.622h3.129V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.098 2.794.142v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.312h3.587l-.467 3.622H16.56V24h6.115c.729 0 1.325-.6 1.325-1.337V1.337C24 .6 23.404 0 22.675 0z"/></svg>
-          </a>
-          <a href="https://youtube.com/@uonskydiving1700" aria-label="YouTube">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><path fill="#fff" d="M23.498 6.186a2.997 2.997 0 00-2.11-2.12C19.645 3.444 12 3.444 12 3.444s-7.644 0-9.388.622a2.997 2.997 0 00-2.11 2.12C0 7.932 0 12 0 12s0 4.069.502 5.814a2.997 2.997 0 002.11 2.12c1.744.622 9.388.622 9.388.622s7.645 0 9.389-.622a2.997 2.997 0 002.11-2.12C24 16.068 24 12 24 12s0-4.068-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          </a>
-        </div>
-
-        <a href="https://su.nottingham.ac.uk/activities/view/skydive" target="_blank" rel="noopener noreferrer" class="btn-su mobile-btn">UoNSU</a>
-      </nav>
-    </aside>
-  </div>
-
   <!-- ============== MAIN ============== -->
-  <main>
-    <h1 class="page-title">ABOUT US</h1>
+  <main class="info-main">
+    <section class="section container">
+      <h1 class="page-title">ABOUT US</h1>
+    </section>
     <hr class="divider" />
 
-    <section class="about-section">
-      <div class="about-text">
-        <p>Welcome to the University of Nottingham Skydiving Club! We are a supportive and inclusive club that offers students at the University of Nottingham the chance to gain their <b>skydiving licence</b> and jump out of a plane <b>completely solo!</b></p>
+    <section class="about-section section container">
+      <p class="about-text">Welcome to the University of Nottingham Skydiving Club! We are a supportive and inclusive club that offers students at the University of Nottingham the chance to gain their <b>skydiving licence</b> and jump out of a plane <b>completely solo!</b></p>
 
-        <p>Our home dropzone is <b>Skydive Langar</b>, an old RAF base located 30&nbsp;minutes from the university campus. Having completed 50,000 jumps in 2023, Skydive Langar is the <b>UK’s biggest dropzone</b> offering world‑class instructing and coaching for our members, and we’re proud to call it home.</p>
+      <div class="about-row">
+        <div class="about-column">
+          <p class="about-text">Our home dropzone is <b>Skydive Langar</b>, an old RAF base located 30&nbsp;minutes from the university campus. Having completed 50,000 jumps in 2023, Skydive Langar is the <b>UK’s biggest dropzone</b> offering world‑class instructing and coaching for our members, and we’re proud to call it home.</p>
 
-        <a href="https://www.skydivelangar.co.uk" target="_blank" rel="noopener noreferrer" class="btn-su btn-langar">SKYDIVE LANGAR</a>
-      </div>
+          <a href="https://www.skydivelangar.co.uk" target="_blank" rel="noopener noreferrer" class="btn-su btn-langar">SKYDIVE LANGAR</a>
+        </div>
 
-      <div class="about-map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9555.79809272814!2d-0.955174019367048!3d52.888398254069484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879d0f73d0b2571%3A0x260dcb32d780a69!2sSkydive%20Langar!5e0!3m2!1sen!2suk!4v1719420000000" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="about-map">
+          <iframe src="https://maps.google.com/maps?q=Skydive%20Langar&t=k&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </section>
 
     <hr class="divider" />
 
-    <section class="tile-grid">
-      <a href="join.html">
-        <img src="images/tile-join.jpg" alt="How to join">
+    <section class="tile-grid section container">
+      <a href="how-to-join.html">
+        <img src="Images/How To Join Thumbnail.webp" alt="How to join">
         <span>HOW TO JOIN</span>
       </a>
-      <a href="licence.html">
-        <img src="images/tile-licence.jpg" alt="Getting your licence">
+      <a href="getting-your-licence.html">
+        <img src="Images/Getting Your Licence Thumbnail.webp" alt="Getting your licence">
         <span>GETTING YOUR LICENCE</span>
       </a>
-      <a href="pricing.html">
-        <img src="images/tile-pricing.jpg" alt="Pricing">
+      <a href="prices.html">
+        <img src="Images/Pricing Thumbnail.webp" alt="Pricing">
         <span>PRICING</span>
       </a>
-      <a href="committee.html">
-        <img src="images/tile-committee.jpg" alt="Our committee">
+      <a href="our-committee.html">
+        <img src="Images/Our Committee Thumbnail.webp" alt="Our committee">
         <span>OUR COMMITTEE</span>
       </a>
-      <a href="history.html">
-        <img src="images/tile-history.jpg" alt="History and legacy">
+      <a href="history-and-legacy.html">
+        <img src="Images/History Legacy Thumbnail.webp" alt="History and legacy">
         <span>HISTORY &amp; LEGACY</span>
       </a>
       <a href="faqs.html">
-        <img src="images/tile-faqs.jpg" alt="Frequently asked questions">
+        <img src="Images/FAQ Thumbnail.webp" alt="Frequently asked questions">
         <span>FREQUENTLY ASKED QUESTIONS</span>
       </a>
     </section>
   </main>
 
 </body>
-<script>
-const navToggle = document.getElementById('nav-toggle');
-
-function syncScrollLock() {
-  document.body.style.overflow = navToggle.checked ? 'hidden' : '';
-}
-navToggle.addEventListener('change', syncScrollLock);
-
-// close menu + unlock scroll when a sidebar link is tapped
-document.querySelectorAll('.mobile-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navToggle.checked = false;
-    syncScrollLock();
-  });
-});
-</script>
 </html>
